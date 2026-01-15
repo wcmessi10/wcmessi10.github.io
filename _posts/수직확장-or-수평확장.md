@@ -5,7 +5,7 @@ subtitle: There's lots to learn!
 tags: [test]
 comments: true
 mathjax: true
-author: Bill Smith
+author: 이희두
 ---
 
 # **수직확장**
