@@ -1,4 +1,12 @@
-# 수직확장 or 수평확장
+---
+layout: post
+title: 수직확장 or 수평확장
+subtitle: There's lots to learn!
+tags: [test]
+comments: true
+mathjax: true
+author: Bill Smith
+---
 
 # **수직확장**
 
