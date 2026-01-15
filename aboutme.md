@@ -37,7 +37,6 @@ subtitle: 안녕하세요, 백엔드 개발자 이희두입니다.
 
 #### Infra & DevOps
 - **Docker / Docker Compose**
-- **Kubernetes (OKE)**
 - **Oracle Cloud Infrastructure (OCI)**
 - **Jenkins (CI/CD)**
 
