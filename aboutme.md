@@ -49,6 +49,7 @@ subtitle: 안녕하세요, 백엔드 개발자 이희두입니다.
 - **Swagger / OpenAPI**
 - **IntelliJ IDEA**
 - **Notion / Jira**
+
 ---
 
 ### 🛠️ 관심사 & 취미
