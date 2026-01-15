@@ -1,8 +1,7 @@
 ---
 layout: post
 title: 수직확장 or 수평확장
-subtitle: There's lots to learn!
-tags: [test]
+tags: [Architecture]
 comments: true
 mathjax: true
 author: 이희두
@@ -33,7 +32,7 @@ author: 이희두
 - **sorry, too many clients already'**
     - PostgreSql 동시 연결 제한에 걸렸을 때 나오는 Exception 중 하나
     - 해당 해결 방법 : postgresql 설정 파일에서 **max_connection = 제한 개수** 확장
-    - 기존 서버 리소스 활용도를 높이는 것이기에 수평 확장에 해당
+    - 기존 서버 리소스 활용도를 높이는 것이기에 수직 확장에 해당
     - 스케줄러로 다건 데이터 조회 및 삽입 중 문제가 자주 발생
 - **Load Balancer**
     - 서버 요청 부하를 막기 위해, 여러 인스턴스들이 해당 작업을 분담하는 역할
