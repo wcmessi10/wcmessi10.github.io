@@ -1,16 +1,23 @@
 ---
 layout: page
 title: About me
-subtitle: Why you'd want to go on a date with me
+subtitle: 안녕하세요 저는 백엔드 개발자 이희두입니다. 
 ---
 
-My name is Inigo Montoya. I have the following qualities:
+안녕하세요 저는 백엔드 개발자 이희두입니다. 견고하고 확장 가능한 백엔드 시스템을 설계하고 개발해 온 개발자 이희두입니다. 사용자와 현장 실무자들의 요청을 안정적으로 처리하는 API를 만드는 과정에 흥미를 느끼며, 비즈니스 요구사항을 기술적으로 구현하여 실질적인 가치를 창출하는 데 보람을 느낍니다. 
 
-- I rock a great mustache
-- I'm extremely loyal to my family
+### 취미
+- 헬스(헬린이)
+- 해외축구 시청 -> FC 바르셀로나 18년차 팬
 
-What else do you need?
+### 개발하면서 느낀 나의 키워드
+- **주도적인 문제 해결과 시스템 안정성 확보 경험**
+- **다양한 기술 스택과 비즈니스 도메인 경험**
+- **함께 성장하는 개발자**
 
-### My story
+### 학력
 
-To be honest, I'm having some trouble remembering right now, so why don't you just watch [my movie](https://en.wikipedia.org/wiki/The_Princess_Bride_%28film%29) and it will answer **all** your questions.
+가톨릭관동대학교 소프트웨어학과 졸업
+
+### 이력서 링크
+[이희두 이력서](https://drive.google.com/file/d/1eNBT3mEYWlCh6MpLp-37ZD40-1AznSfK/view?usp=drive_link)
