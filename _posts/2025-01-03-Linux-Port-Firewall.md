@@ -7,8 +7,6 @@ mathjax: true
 author: 이희두
 ---
 
-# 리눅스 방화벽 포트 관련 영구 설정
-
 # **작성 사유**
 
 기존에는 리눅스 환경 내에서 sudo iptables -I INPUT 6 -m state --state NEW -p tcp --dport ${포트번호} -j ACCEPT 로 방화벽에 포트 적용하는 명령어로 설정했었음.
