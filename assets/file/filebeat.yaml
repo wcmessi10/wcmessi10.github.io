@@ -1,0 +1,54 @@
+filebeat.inputs:
+- type: log
+  paths:
+    - /path/to/log/log_*.log
+  processors:
+    - grok:
+        patterns:
+          - '\[%{TIMESTAMP_ISO8601:receivedTimestamp}\].*recording\s*:\s*%{DATA:recording_topic},\s*msg:\s*%{GREEDYDATA:msg}'
+
+    - decode_json_fields:
+        fields: ["msg"]
+        target: ""
+        overwrite_keys: true
+
+    - script:
+        lang: javascript
+        id: convert_receivedTimestamp
+        source: >
+          function process(event) {
+              var ts = event.Get("receivedTimestamp");
+              if (ts) {
+                  // ISO8601 -> epoch(ms)
+                  var epoch = Date.parse(ts);
+                  event.Put("receivedTimestamp", epoch);
+              }
+          }
+
+    - script:
+        lang: javascript
+        id: extract_device_id
+        source: >
+          function process(event) {
+              var topic = event.Get("recording_topic");
+              if (topic) {
+                  var parts = topic.split("/");
+                  var deviceId = parts[parts.length - 1];
+                  event.Put("device_id", deviceId);
+              }
+          }
+
+    - script:
+        lang: javascript
+        id: sanitize_topic
+        source: >
+          function process(event) {
+              var topic = event.Get("recording_topic");
+              if (topic) {
+                  event.Put("recording_topic", topic.replace(/\//g, "_"));
+              }
+          }
+
+output.elasticsearch:
+  hosts: ["http://<elasticsearch-host>:9200"]
+  index: "%{[recording_topic]}-%{+yyyy.MM.dd}"
