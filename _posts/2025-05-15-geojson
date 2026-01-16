@@ -1,0 +1,112 @@
+---
+layout: post
+title: GeoJson
+tags: [Geospatial,Data Modeling]
+comments: true
+mathjax: true
+author: 이희두
+---
+
+# GeoJson
+
+# **목적**
+
+지도 api에서 사용할 엘라스틱서치 QueryDSL GeoShpae쿼리를 예정. GeoShape쿼리에서 쓰이는 옵션 shape에서는 GeoJson과 WKT 형식이 사용 가능. 공개표준형식인 GeoJson에 대해 정리
+
+# **GeoJson이란?**
+
+위치 정보를 갖는 점을 기반으로 체계적으로 지형을 표현하기 위해 설계된 개방형 공개 표준 형식. JSON인 자바스크립트 오브젝트 노테이션(Object Notation)을 사용하는 파일 포맷이다.
+
+```
+{
+"type": "FeatureCollection",
+"features": [
+    {
+"type": "Feature",
+"geometry": {
+"type": "Point",
+"coordinates": [102.0, 0.5]
+      },
+"properties": {
+"prop0": "value0"
+      }
+    },
+    {
+"type": "Feature",
+"geometry": {
+"type": "LineString",
+"coordinates": [
+          [102.0, 0.0], [103.0, 1.0], [104.0, 0.0], [105.0, 1.0]
+        ]
+      },
+"properties": {
+"prop0": "value0",
+"prop1": 0.0
+      }
+    },
+    {
+"type": "Feature",
+"geometry": {
+"type": "Polygon",
+"coordinates": [
+          [
+            [100.0, 0.0], [101.0, 0.0], [101.0, 1.0],
+            [100.0, 1.0], [100.0, 0.0]
+          ]
+        ]
+      },
+"properties": {
+"prop0": "value0",
+"prop1": {"this": "that" }
+      }
+    }
+  ]
+}
+
+```
+
+# **GeoJson 형식**
+
+- GeoJson 형식은 3가지가 있다. Geometry, Feature, FeatureCollection
+
+Geometry : 지오메트리 유형 및 좌표를 사용하는 단순한 지오메트리
+
+Feature : 지리적 속성 데이터를 포함한 Geometry가 들어간 GeoJson
+
+FeatureCollection : 지리적 속성 데이터를 포함한 Feature 여러 개를 하나의 GeoJson으로 표현
+
+# **Geometry 속성(type)**
+
+- 위 세가지 형식 중 GeoShape에서 사용할 속성은 Geometry
+- 이 Geometry 속성에도 체계적으로 지형을 표현할 여러 세부 속성이 존재한다.
+    
+    1. Point : 말 그대로 단순 점(좌표)이다.
+    
+    2. LineString : 여러 점(좌표)들을 이은 선들이다.
+    
+    3. Polygon : 여러 개의 선들을 이어서 만든 면이다. 다각형, 내부 구멍을 넣을 수도 있다.
+    
+    4. MultiPoint : 여러 개의 점.
+    
+    5. MultiLineString : 점들을 이은 선들이 여러 개이다.(분리된 선들을 말한다.)
+    
+    6. MultiPolygon : 여러 개의 면들이다.
+    
+
+# **Coordinates**
+
+- GeoJson의 속성들 중 필수로 들어가는 Coordinates 속성에는 좌표들이 들어간다. 좌표 하나 당 배열로 묶는데, ***순서는 경도, 위도 이다.
+
+```
+{
+"type": "Polygon",
+"coordinates": [[[10.0, 11.2], [10.5, 11.9], [10.8, 12.0], [10.0,11.2]]]
+}
+
+```
+
+# **참고**
+
+[https://www.ibm.com/docs/ko/db2/11.5?topic=formats-geojson-format](https://www.ibm.com/docs/ko/db2/11.5?topic=formats-geojson-format)
+
+[https://velog.io/@jbg0528/GeoJSON](https://velog.io/@jbg0528/GeoJSON)
