@@ -1,0 +1,142 @@
+filebeat.inputs:
+- type: filestream
+  id: mqtt-log
+  paths:
+    - /path/to/logs/log_*.log
+
+  processors:
+    # 1. ANSI 색상 코드 제거
+    - script:
+        lang: javascript
+        id: remove_ansi_color
+        source: >
+          function process(event) {
+            var msg = event.Get("message");
+            if (msg) {
+              var cleaned = msg.replace(/\u001b\[[0-9;]*m/g, '');
+              event.Put("message", cleaned);
+            }
+          }
+
+    # 2. "recording :"와 "msg:"가 없는 이벤트는 드롭
+    - drop_event:
+        when:
+          not:
+            and:
+              - contains:
+                  message: "recording :"
+              - contains:
+                  message: "msg:"
+
+    # 3. dissect: 고정된 형식 파싱
+    - dissect:
+        tokenizer: "[%{receivedTimestampFull}][%{}] INFO  %{} - recording : %{recording_topic}, msg: %{msg}"
+        target_prefix: ""
+
+    # 4. JSON 디코딩
+    - decode_json_fields:
+        fields: ["msg"]
+        target: ""
+        overwrite_keys: true
+
+    - script:
+        lang: javascript
+        id: convert_receivedTimestamp
+        source: >
+          function process(event) {
+            var ts = event.Get("receivedTimestampFull");
+
+            if (typeof ts === 'string') {
+              try {
+                // 날짜 + 시간 분리 및 포맷 조정
+                var match = ts.match(/^(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})/);
+                if (!match) return;
+
+                var isoTime = match[1].replace(" ", "T") + "Z"; // ISO8601 변환
+                var epoch = Date.parse(isoTime);
+
+                if (!isNaN(epoch)) {
+                  event.Put("receivedTimestamp", epoch);
+                  var iso = new Date(epoch).toISOString();
+                  event.Put("@timestamp", iso);
+                }
+              } catch (e) {
+                // 문제 생겨도 Filebeat 멈추지 않게 함
+              }
+            }
+          }
+
+
+    # 6. IMEI 추출
+    - script:
+        lang: javascript
+        id: extract_imei
+        source: >
+          function process(event) {
+            var topic = event.Get("recording_topic");
+            if (topic) {
+              var parts = topic.split("/");
+              var imei = parts[parts.length - 1];
+              event.Put("imei", imei);
+            }
+          }
+
+    # 7. recording_topic → 언더스코어 치환
+    - script:
+        lang: javascript
+        id: sanitize_topic
+        source: >
+          function process(event) {
+            var topic = event.Get("recording_topic");
+            if (topic) {
+              event.Put("recording_topic", topic.replace(/\//g, "_"));
+            }
+          }
+
+    # 8. mqtt_topic 생성 (IMEI 제외한 부분만)
+    - script:
+        lang: javascript
+        id: create_mqtt_topic
+        source: >
+          function process(event) {
+            var topic = event.Get("recording_topic");
+            if (topic) {
+              var parts = topic.split("_");
+              if (parts.length > 1) {
+                var mqtt_topic = parts.slice(0, parts.length - 1).join("_");
+                event.Put("mqtt_topic", mqtt_topic);
+              } else {
+                event.Put("mqtt_topic", topic);
+              }
+            }
+          }
+
+    # 9. dissect 파싱 실패 이벤트 제거
+    - drop_event:
+        when:
+          equals:
+            log.flags: ["dissect_parsing_error"]
+
+    # 10. 불필요한 필드 제거 (최종 정리)
+    - drop_fields:
+        fields: ["message", "log", "input", "agent", "host", "dissect"]
+
+output.elasticsearch:
+  hosts: ["https://<elasticsearch-host>:9200"]
+  username: "<elastic-username>"
+  password: "<elastic-password>"
+  ssl.certificate_authorities: ["/path/to/http_ca.crt"]
+  index: "%{[mqtt_topic]}-%{+yyyy.MM.dd}"
+
+setup.template.name: "filebeat"
+setup.template.pattern: "filebeat-*"
+
+logging:
+  level: info
+  to_files: true
+  to_syslog: false
+  files:
+    path: /path/to/filebeat/logs
+    name: filebeat.log
+    keepfiles: 7
+    permissions: 0644
