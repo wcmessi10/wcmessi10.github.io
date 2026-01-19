@@ -1,3 +1,12 @@
+---
+layout: post
+title: Spring Batch를 활용한 데이터 집계
+tags: [Spring Boot, Spring Batch, Scheduling, Backend]
+comments: true
+mathjax: true
+author: 이희두
+---
+
 > 본 문서에서 “스테이션”은 배터리 충전이 이루어지는 물리적 거점 또는 데이터 집계를 위한 논리적 단위를 의미한다.
 
 # 개발 목표
