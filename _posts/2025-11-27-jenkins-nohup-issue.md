@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Jenkins 파이프라인 nohup 오류 원인 및 해결 방법
-tags: [Backend, Spring, Cache]
+tags: [CI/CD, Jenkins]
 comments: true
 mathjax: true
 author: 이희두
