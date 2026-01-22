@@ -17,7 +17,7 @@ author: 이희두
 
 Slack 봇을 이용해 채널 메시지를 출력하기 위해 Workspace에 App 생성
 
-[Screenshot](assets/img/스크린샷_2024-08-20_162121 (1).png)
+[Screenshot](/assets/img/스크린샷_2024-08-20_162121 (1).png)
 
 ---
 
