@@ -17,7 +17,7 @@ author: 이희두
 
 Slack 봇을 이용해 채널 메시지를 출력하기 위해 Workspace에 App 생성
 
-![Screenshot](/assets/img/스크린샷_2024-08-20_162121 (1).png)
+![Screenshot](/assets/img/slack1.png)
 
 ---
 
@@ -26,7 +26,7 @@ Slack 봇을 이용해 채널 메시지를 출력하기 위해 Workspace에 App 
 - 특정 채널로 메시지를 보내는 Slack Web API
 - `chat.postMessage` 사용을 위해 `chat:write` 권한(스코프) 추가 필요
 
-(스크린샷 생략)
+![Screenshot2](/assets/img/slack2.png)
 
 ## 의존성 추가
 
@@ -85,7 +85,7 @@ public class SlackController {
 * 채널 ID는 테스트 단계에서 고정값 사용
 * 컨트롤러 단위 사전 테스트 완료
 
-(스크린샷 생략)
+![Screenshot3](/assets/img/slack3.png)
 
 ---
 
@@ -104,10 +104,11 @@ Logstash가 이를 받아 서버 컨트롤러를 호출하도록 구성
 * **filter**: Ruby 코드로 UTF-8 인코딩/정리
 * **output**: HTTP output 플러그인으로 서버 컨트롤러 호출
 
-(스크린샷 생략)
+![Screenshot4](/assets/img/slack4.png)
 
 추가로 pipeline에 해당 설정 파일을 등록
 
+![Screenshot5](/assets/img/slack6.png)
 ---
 
 # Logstash 테스트
@@ -116,7 +117,11 @@ Logstash가 이를 받아 서버 컨트롤러를 호출하도록 구성
 * Logstash 수신 로그 확인
 * Slack 채널 메시지 업로드 확인
 
-(스크린샷 생략)
+![Screenshot6](/assets/img/slack5.png)
+
+![Screenshot7](/assets/img/slack7.png)
+
+![Screenshot8](/assets/img/slack8.png)
 
 ---
 
