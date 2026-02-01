@@ -1,6 +1,6 @@
 ---
 layout: post
-title: OCR
+title: Elasticsearch /_cat/indices
 tags: [Elasticsearch, Health Check, indicies, Sharding]
 comments: true
 mathjax: true
