@@ -1,6 +1,6 @@
 ---
 layout: post
-title: ResponseEntity
+title: Elasticsearch Query DSL
 tags: [Elasticsearch, QueryDSL]
 comments: true
 mathjax: true
