@@ -26,7 +26,7 @@ Elasticsearch Client Library의 쿼리 빌더를 사용한 쿼리 구현체다.
 
 - 엘라스틱 서버에서 테스트하는 방식(ElasticsearchOperation)
 - 자바 클라이언트 안에서 테스트하는 방식(ElasticsearchClient)
-![](https://velog.velcdn.com/images/wcmessi10/post/47a0e15b-2f09-46f7-864c-fb647f62af52/image.PNG)
+![](/assets/img/캡처.PNG)
 
 왼쪽 주황색 박스가 엘라스틱 서치 서버에서 구현한 테스트 코드(하단)와 ElasticsearchOperation 클래스에서 검색 메소드(상단),
 
@@ -34,8 +34,8 @@ Elasticsearch Client Library의 쿼리 빌더를 사용한 쿼리 구현체다.
 
 필자는 gt 190000000(1억 9천만), lt 430000000(4억 3천만)의 범위를 통해 테스트를 주었다.
 # 성능 테스트 결과
-![](https://velog.velcdn.com/images/wcmessi10/post/06a11074-3fee-407d-b96b-836741e88c2d/image.PNG)
+![](/assets/img/캡처3.PNG)
 Elasticsearch 서버에서 결과값을 도출해낸 시간(2582ms)
 
-![](https://velog.velcdn.com/images/wcmessi10/post/67e7671b-407d-49ff-8935-fdd59a13db75/image.PNG)
+![](/assets/img/캡처4.PNG)
 클라이언트 통해서 결과값을 도출해낸 시간(4134ms)
