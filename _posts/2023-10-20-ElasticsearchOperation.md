@@ -86,10 +86,10 @@ Spring Data Elasticsearch 5.0의 마이그레이션 가이드에 따르면, 새 
 * 클라이언트 직접 호출은 **deprecated 흐름**이므로 신규 개발에서는 피하는 게 좋습니다.
 
 ## 7) 출처
-([Home][1])
-([Home][2])
-([Elastic][3])
+([Spring Data Elasticsearch 버전 관련 공식 문서][1])
+([Spring Data Elasticsearch 참고 공식 문서][2])
+([Java Elasticsearch REST Client][3])
 
 [1]: https://docs.spring.io/spring-data/elasticsearch/reference/migration-guides/migration-guide-4.4-5.0.html "Upgrading from 4.4.x to 5.0.x :: Spring Data Elasticsearch"
-[2]: https://docs.spring.io/spring-data/elasticsearch/docs/4.1.16-SNAPSHOT/reference/html/?utm_source=chatgpt.com "Spring Data Elasticsearch - Reference Documentation"
-[3]: https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/java-rest-high.html?utm_source=chatgpt.com "Java High Level REST Client"
+[2]: https://docs.spring.io/spring-data/elasticsearch/docs/4.1.16-SNAPSHOT/reference/html "Spring Data Elasticsearch - Reference Documentation"
+[3]: https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/java-rest-high.html "Java High Level REST Client"
